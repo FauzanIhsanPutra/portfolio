@@ -1,238 +1,700 @@
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>My Portfolio</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-        <link rel="icon" href="F Logo.png">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
-        <style>
-            .card img {
-                object-fit: cover;
-                height: 200px;
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="icon" href="F Logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+    <style>
+        body {
+            background-color: #1a1a2e;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .card img {
+            object-fit: cover;
+            height: 200px;
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .navLogo {
+            width: 50px;
+        }
+
+        .welcome-text {
+            font-size: 3em;
+            font-weight: bold;
+            color: #00aaff;
+            text-align: center;
+            margin: 40px auto;
+            min-height: 1.5em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .typing-text {
+            white-space: nowrap;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 0.15em;
+            height: 1em;
+            background-color: #00aaff;
+            animation: blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes blink-caret {
+
+            0%,
+            100% {
+                opacity: 0;
             }
 
-            ::-webkit-scrollbar {
-                display: none;
+            50% {
+                opacity: 1;
+            }
+        }
+
+        #about {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 50px 0;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        #about .profile-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #about .profile-pic {
+            height: 250px;
+            width: 250px;
+            border-radius: 10px;
+            margin-right: 20px;
+        }
+
+        #about .text-content {
+            text-align: center;
+            max-width: 600px;
+        }
+
+        #about .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 100px;
+            max-width: 900px;
+            transition: all 0.3s ease-in-out;
+            justify-content: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .info-card {
+            background: #16213e;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: all 0.4s ease;
+            transform-origin: center;
+            cursor: pointer;
+        }
+
+        .info-card:hover {
+            transform: scale(1.08);
+            background: #1f2a49;
+            box-shadow: 0 0 20px rgba(0, 170, 255, 0.3);
+        }
+
+        .info-card:hover i {
+            color: #00aaff;
+            transition: color 0.3s ease;
+        }
+
+        /* Tools slider */
+        #tool-slider {
+            overflow: hidden;
+        }
+
+        .slider-wrapper {
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .slider-track {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            user-select: none;
+        }
+
+        .slider-row {
+            display: flex;
+            width: max-content;
+        }
+
+        .slider-row.left {
+            animation: scroll-left 25s linear infinite;
+        }
+
+        .slider-row.right {
+            animation: scroll-right 25s linear infinite;
+        }
+
+        .slider-item {
+            padding: 12px 24px;
+            margin: 0 10px;
+            font-size: 1.2rem;
+            background-color: #1a1a2e;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 170, 255, 0.463);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            white-space: nowrap;
+            transition: transform 0.3s;
+            border: 1px solid #00aaff30;
+        }
+
+        .slider-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(0, 170, 255, 0.3);
+        }
+
+        @keyframes scroll-left {
+            0% {
+                transform: translateX(0%);
             }
 
-            .card:hover {
-                transform: translateY(-10px);
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            100% {
+                transform: translateX(-50%);
             }
-            .extra-large-gap {
-            margin-top: 75px;
-            }
+        }
 
-            .logo{
-                margin-right: 1000px;
+        @keyframes scroll-right {
+            0% {
+                transform: translateX(-50%);
             }
 
-            .navLogo {
-                width: 50px;
+            100% {
+                transform: translateX(0%);
             }
-        </style>
-    </head>
-    <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container">
-                <img class="navLogo" src="F Logo.png" alt="">
-                <a class="navbar-brand" href="#">auzan</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="#about">About Me</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#softskills">Softskills</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#tech">Technologies</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        }
 
-        <div class="container text-center extra-large-gap">
-            <img class="logo" src="F Logo.png" alt="">
-            <img data-aos="fade-up" style="height: 150px; border-radius: 100%; width: 150px;" src="09647 (2).jpg" alt="fauzan pict">
-        </div>
+        .btn-cv {
+            background: linear-gradient(135deg, #00aaff, #0055ff);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(0, 170, 255, 0.4);
+            transition: all 0.3s ease-in-out;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-        <section id="about" class="py-5" data-aos="fade-up">
-            <div class="container text-center" >
-                <br>
-                <h2>About Me</h2>
-                <p>I am Fauzan Ihsan Putra, a beginner programmer and game designer passionate about creating impactful projects with Code, Arts and Videos.</p>    
-                <p>Currently working on personal projects but i am willing to work for/with anybody</p>    
-                <a data-aos="fade-up" class="btn btn-secondary" href="image/CV - Fauzan Ihsan.pdf" download="Fauzan-Curriculum Vitae"> Get My CV</a>
-            </div>
-        </section>
+        .btn-cv:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 6px 25px rgba(0, 170, 255, 0.6);
+            background: linear-gradient(135deg, #0055ff, #00aaff);
+            color: #fff;
+            text-decoration: none;
+        }
 
-        <section id="softskills" class="bg-light py-5" data-aos="fade-right">
-            <div class="container">
-                <h2 class="text-center">Softskills</h2>
-                <div class="row justify-content-center">
-                    <div class="col-md-8">
-                        <ul class="list-group list-group-flush" data-aos="fade-down">
-                            <li class="list-group-item">Problem Solving</li>
-                            <li class="list-group-item">Creative Thinking</li>
-                            <li class="list-group-item">Team Collaboration</li>
-                            <li class="list-group-item">Time Management</li>
-                            <li class="list-group-item">Quick Adaptation</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
+        /* Softskills styling */
+        .softskills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            padding: 20px;
+        }
 
-        <section id="education" class="py-5" data-aos="flip-left">
-            <div class="container text-center">
-                <h2>Education</h2>
-                <p>Currently studying Software and Game Development at SMK Wikrama Bogor.</p>
-                <br>
-                <h2>Past Education</h2>
-                <ul class="list-group list-group-flush" data-aos="fade-down">
-                    <li class="list-group-item">2014-2020 -> SDIT Al-Husna</li>
-                    <li class="list-group-item">2021-2023 -> SMPIT Al-Husna</li>
+        .softskill-card {
+            background: #16213e;
+            border-radius: 10px;
+            padding: 20px;
+            width: 200px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 170, 255, 0.2);
+        }
+
+        .softskill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0, 170, 255, 0.4);
+        }
+
+        .softskill-card h4 {
+            margin: 10px 0;
+            color: #00aaff;
+        }
+
+        /* Education cards */
+        .education-card {
+            background: #16213e;
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 170, 255, 0.2);
+        }
+
+        .education-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0, 170, 255, 0.4);
+        }
+
+        .education-card .edu-image {
+            width: 100px;
+            height: 100px;
+            background: #1f2a49;
+            border-radius: 8px;
+            flex-shrink: 0;
+        }
+
+        .education-card .edu-content {
+            flex-grow: 1;
+        }
+
+        /* Contact section styling */
+        #contact {
+            position: relative;
+            z-index: 10;
+            padding: 30px 0;
+        }
+
+        .contact-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            padding: 15px;
+            background: #16213e;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 170, 255, 0.2);
+            margin-top: 10px;
+            min-height: 80px;
+        }
+
+        .contact-btn {
+            background: linear-gradient(135deg, #00aaff, #0055ff);
+            color: #fff;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 170, 255, 0.3);
+            text-decoration: none;
+        }
+
+        .contact-btn:hover {
+            background: linear-gradient(135deg, #0055ff, #00aaff);
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 170, 255, 0.5);
+            color: #fff;
+        }
+
+        .contact-btn i {
+            font-size: 1.3rem;
+        }
+
+        @media (max-width: 768px) {
+            .education-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .education-card .edu-image {
+                margin-bottom: 10px;
+            }
+
+            #about .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .softskill-card {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .contact-btn {
+                padding: 8px 14px;
+                font-size: 0.85rem;
+            }
+
+            .contact-container {
+                margin-top: 8px;
+                min-height: 60px;
+            }
+
+            #contact {
+                padding: 20px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <img class="navLogo" src="F Logo.png" alt="">
+            <a class="navbar-brand" href="#">auzan</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#about">About Me</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#softskills">Softskills</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
                 </ul>
             </div>
-        </section>
+        </div>
+    </nav>
 
-        <section id="projects" class="py-5">
-            <div class="container" data-aos="fade-up">
-                <h2 class="text-center">My Projects</h2>
-                <div class="row row-cols-1 row-cols-md-3 g-4">
-                    <!-- Project Card 1 -->
-                    <div class="col" data-aos="flip-up">
-                        <div class="card h-100">
-                            <img src="Screenshot 2024-10-03 130751.png" class="card-img-top" alt="Project 1">
-                            <div class="card-body">
-                                <h5 class="card-title">Project 1</h5>
-                                
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col" data-aos="flip-up">
-                        <div class="card h-100">
-                            <img src="Screenshot (162).png" class="card-img-top" alt="Project 2">
-                            <div class="card-body">
-                                <h5 class="card-title">Project 2</h5>
-                                
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col" data-aos="flip-up">
-                        <div class="card h-100">
-                            <img src="Screenshot (241).png" class="card-img-top" alt="Project 3">
-                            <div class="card-body">
-                                <h5 class="card-title">Project 3</h5>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <h2 class="text-center mt-5">Video & Art Projects</h2>
-                <div class="row row-cols-1 row-cols-md-3 g-4" data-aos="fade-up">
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="Gloomie.png" class="card-img-top" alt="Video/Art 1">
-                            <div class="card-body">
-                                <h5 class="card-title">Art Project 1</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col" data-aos="flip-up">
-                        <div class="card h-100">
-                            <img src="background - Copy.gif" class="card-img-top" alt="Video/Art 2">
-                            <div class="card-body">
-                                <h5 class="card-title">Art Project 2</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col" data-aos="flip-up">
-                        <div class="card h-100">
-                            <img src="Skull Merchant's Blade Idea.png" class="card-img-top" alt="Video/Art 2">
-                            <div class="card-body">
-                                <h5 class="card-title">Art Project 3</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col" data-aos="flip-up">
-                        <div class="card h-100">
-                            <img src="Screenshot 2024-07-25 214114.png" class="card-img-top" alt="Video/Art 2">
-                            <div class="card-body">
-                                <h5 class="card-title">Art Project 4</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col" data-aos="flip-up">
-                        <div class="card h-100">
-                            <img src="Screenshot 2024-07-25 211156.png" class="card-img-top" alt="Video/Art 2">
-                            <div class="card-body">
-                                <h5 class="card-title">Art Project 5</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-center align-items-center">
-                        <h2>And Many More!!</h2>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <div class="welcome-text" data-aos="zoom-in">
+        <span class="typing-text"></span>
+    </div>
 
-        <section id="tech" class="bg-light py-5" data-aos="flip-right">
-            <div class="container text-center">
-                <h2>Technologies I Used</h2>
-                <p>HTML, CSS, JavaScript, PHP, Laravel, Unity, Aseprite</p>
-            </div>
-        </section>
-
-        <section id="quotes" class="bg-light py-5" data-aos="zoom-in">
-            <div class="container text-center">
-                <blockquote class="blockquote">
-                    <h1 class="mb-0">"The Finest Art is The Art of Failure"</h1>
-                    <br>
-                    <footer class="blockquote-footer">Fauzan Ihsan Putra</footer>
-                </blockquote>
-            </div>
-        </section>
-
-        <section id="contact" class="py-5" data-aos="fade-left">
-            <div class="container text-center">
-                <h2>Contact Me!!</h2>
-                <div class="d-flex justify-content-center flex-wrap" data-aos="fade-right">
-                    <a href="https://github.com/FauzanIhsanPutra" class="btn btn-dark m-2" target="_blank">
-                        <i class="fa-brands fa-github fa-xl"></i> GitHub
-                    </a>
-                </div>
-        
-                <div class="d-flex justify-content-center flex-wrap" data-aos="fade-right">
-                    <a href="https://www.instagram.com/aadv4rk/" class="btn btn-primary m-2" target="_blank">
-                        <i class="fa-brands fa-instagram fa-xl"></i> Instagram
-                    </a>
-                </div>
-                
-                <div class="d-flex justify-content-center flex-wrap" data-aos="fade-right">
-                    <a href="https://www.linkedin.com/in/fauzanihsputra/" class="btn btn-info m-2" target="_blank">
-                        <i class="fa-brands fa-linkedin fa-xl"></i> LinkedIn
-                    </a>
-                </div>
-                <div class="d-flex justify-content-center flex-wrap" data-aos="fade-right">
-                    <a href="https://discord.gg/PkzVpPJkah" class="btn btn-info m-2" target="_blank">
-                        <i class="fa-brands fa-discord fa-xl"></i> Discord
+    <section id="about" class="py-5" data-aos="fade-up">
+        <div class="container">
+            <div class="profile-container">
+                <img class="profile-pic" src="09647 (2).jpg" alt="Fauzan Ihsan Profile Picture">
+                <div class="text-content">
+                    <h2>About Me</h2>
+                    <p>I am Fauzan Ihsan Putra, a beginner programmer and game designer passionate about creating
+                        impactful projects with Code, Arts and Videos.</p>
+                    <p>Currently working on personal projects but I am willing to work for/with anybody.</p>
+                    <a data-aos="fade-up" class="btn btn-cv mt-3" href="image/CV - Fauzan Ihsan.pdf"
+                        download="Fauzan-Curriculum Vitae">
+                        <i class="fas fa-file-download"></i> Get My CV
                     </a>
                 </div>
             </div>
-        </section>
-        
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-        <script>
-            AOS.init();
-        </script>
-    </body>
-    </html>
+            <div class="info-grid">
+                <div class="info-card">
+                    <i class="fas fa-code"></i>
+                    <h4>Languages</h4>
+                    <p>HTML, CSS, JavaScript, React Js, Next Js, PHP, Laravel, C#</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h4>Education</h4>
+                    <p>Student | PPLG | SMK Wikrama Bogor 2023- Now</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-briefcase"></i>
+                    <h4>Projects</h4>
+                    <p>Built more than 5 projects</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools Slider -->
+    <section id="tool-slider" class="py-5 text-white">
+        <div class="container text-center mb-4">
+            <h2>Tools I've Worked With</h2>
+        </div>
+        <div class="slider-wrapper">
+            <div class="slider-track">
+                <div class="slider-row left">
+                    <div class="slider-item"><i class="fab fa-figma"></i> Figma</div>
+                    <div class="slider-item"><i class="fas fa-video"></i> CapCut</div>
+                    <div class="slider-item"><i class="fas fa-code"></i> VS Code</div>
+                    <div class="slider-item"><i class="fas fa-server"></i> XAMPP</div>
+                    <div class="slider-item"><i class="fab fa-github"></i> GitHub</div>
+                    <div class="slider-item"><i class="fas fa-database"></i> Navicat</div>
+                    <div class="slider-item"><i class="fas fa-upload"></i> FileZilla</div>
+                    <div class="slider-item"><i class="fas fa-terminal"></i> Terminal</div>
+                    <div class="slider-item"><i class="fab fa-unity"></i> Unity</div>
+                    <!-- Duplicates for seamless scrolling -->
+                    <div class="slider-item"><i class="fab fa-figma"></i> Figma</div>
+                    <div class="slider-item"><i class="fas fa-video"></i> CapCut</div>
+                    <div class="slider-item"><i class="fas fa-code"></i> VS Code</div>
+                    <div class="slider-item"><i class="fas fa-server"></i> XAMPP</div>
+                    <div class="slider-item"><i class="fab fa-github"></i> GitHub</div>
+                    <div class="slider-item"><i class="fas fa-database"></i> Navicat</div>
+                    <div class="slider-item"><i class="fas fa-upload"></i> FileZilla</div>
+                    <div class="slider-item"><i class="fas fa-terminal"></i> Terminal</div>
+                    <div class="slider-item"><i class="fab fa-unity"></i> Unity</div>
+                </div>
+                <div class="slider-row right">
+                    <div class="slider-item"><i class="fab fa-unity"></i> Unity</div>
+                    <div class="slider-item"><i class="fas fa-terminal"></i> Terminal</div>
+                    <div class="slider-item"><i class="fas fa-upload"></i> FileZilla</div>
+                    <div class="slider-item"><i class="fas fa-database"></i> Navicat</div>
+                    <div class="slider-item"><i class="fab fa-github"></i> GitHub</div>
+                    <div class="slider-item"><i class="fas fa-server"></i> XAMPP</div>
+                    <div class="slider-item"><i class="fas fa-code"></i> VS Code</div>
+                    <div class="slider-item"><i class="fas fa-video"></i> CapCut</div>
+                    <div class="slider-item"><i class="fab fa-figma"></i> Figma</div>
+                    <!-- Duplicates for seamless scrolling -->
+                    <div class="slider-item"><i class="fab fa-unity"></i> Unity</div>
+                    <div class="slider-item"><i class="fas fa-terminal"></i> Terminal</div>
+                    <div class="slider-item"><i class="fas fa-upload"></i> FileZilla</div>
+                    <div class="slider-item"><i class="fas fa-database"></i> Navicat</div>
+                    <div class="slider-item"><i class="fab fa-github"></i> GitHub</div>
+                    <div class="slider-item"><i class="fas fa-server"></i> XAMPP</div>
+                    <div class="slider-item"><i class="fas fa-code"></i> VS Code</div>
+                    <div class="slider-item"><i class="fas fa-video"></i> CapCut</div>
+                    <div class="slider-item"><i class="fab fa-figma"></i> Figma</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="softskills" class="py-5" data-aos="fade-right">
+        <div class="container">
+            <h2 class="text-center mb-5">Soft Skills</h2>
+            <div class="softskills-container">
+                <div class="softskill-card" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-lightbulb fa-2x"></i>
+                    <h4>Problem Solving</h4>
+                </div>
+                <div class="softskill-card" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-paint-brush fa-2x"></i>
+                    <h4>Creative Thinking</h4>
+                </div>
+                <div class="softskill-card" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fas fa-users fa-2x"></i>
+                    <h4>Team Collaboration</h4>
+                </div>
+                <div class="softskill-card" data-aos="fade-up" data-aos-delay="400">
+                    <i class="fas fa-clock fa-2x"></i>
+                    <h4>Time Management</h4>
+                </div>
+                <div class="softskill-card" data-aos="fade-up" data-aos-delay="500">
+                    <i class="fas fa-sync fa-2x"></i>
+                    <h4>Quick Adaptation</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education" class="py-5" data-aos="flip-left">
+        <div class="container">
+            <h2 class="text-center mb-5">Education</h2>
+            <div class="education-card" data-aos="fade-up">
+                <div class="edu-image"></div>
+                <div class="edu-content">
+                    <h4>SDIT Al-Husna</h4>
+                    <p>2014 - 2020</p>
+                </div>
+            </div>
+            <div class="education-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="edu-image"></div>
+                <div class="edu-content">
+                    <h4>SMPIT Al-Husna</h4>
+                    <p>2021 - 2023</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="py-5">
+        <div class="container" data-aos="fade-up">
+            <h2 class="text-center">My App Projects</h2>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="col" data-aos="flip-up">
+                    <div class="card h-100">
+                        <img src="Screenshot 2024-10-03 130751.png" class="card-img-top" alt="Project 1">
+                        <div class="card-body">
+                            <h5 class="card-title">Project 1</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col" data-aos="flip-up">
+                    <div class="card h-100">
+                        <img src="Screenshot (162).png" class="card-img-top" alt="Project 2">
+                        <div class="card-body">
+                            <h5 class="card-title">Project 2</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col" data-aos="flip-up">
+                    <div class="card h-100">
+                        <img src="Screenshot (241).png" class="card-img-top" alt="Project 3">
+                        <div class="card-body">
+                            <h5 class="card-title">Project 3</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h2 class="text-center mt-5">Video & Art Projects</h2>
+            <div class="row row-cols-1 row-cols-md-3 g-4" data-aos="fade-up">
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="Gloomie.png" class="card-img-top" alt="Video/Art 1">
+                        <div class="card-body">
+                            <h5 class="card-title">Gloomie</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="Gloomie v2 design.png" class="card-img-top" alt="Video/Art 1">
+                        <div class="card-body">
+                            <h5 class="card-title">Gloomie V2</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col" data-aos="flip-up">
+                    <div class="card h-100">
+                        <img src="face.png" class="card-img-top" alt="Video/Art 2">
+                        <div class="card-body">
+                            <h5 class="card-title"></h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col" data-aos="flip-up">
+                    <div class="card h-100">
+                        <img src="Skull Merchant's Blade Idea.png" class="card-img-top" alt="Video/Art 2">
+                        <div class="card-body">
+                            <h5 class="card-title">Art Project 3</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col" data-aos="flip-up">
+                    <div class="card h-100">
+                        <img src="Screenshot 2024-07-25 214114.png" class="card-img-top" alt="Video/Art 2">
+                        <div class="card-body">
+                            <h5 class="card-title">Art Project 4</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col" data-aos="flip-up">
+                    <div class="card h-100">
+                        <img src="Screenshot 2024-07-25 211156.png" class="card-img-top" alt="Video/Art 2">
+                        <div class="card-body">
+                            <h5 class="card-title">Art Project 5</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center align-items-center">
+                    <h2>And Many More!!</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="quotes" class="py-5" data-aos="zoom-in">
+        <div class="container text-center">
+            <h1 class="mb-0">"The Finest Art is The Art of Failure"</h1>
+            <br>
+            <footer class="blockquote-footer">Fauzan Ihsan Putra</footer>
+        </div>
+    </section>
+
+    <section id="contact" class="py-5">
+        <div class="container text-center">
+            <h2 class="mb-4">Reach Me Out!!</h2>
+            <div class="contact-container">
+                <a href="https://github.com/FauzanIhsanPutra" class="contact-btn" target="_blank">
+                    <i class="fa-brands fa-github"></i> GitHub
+                </a>
+                <a href="https://www.instagram.com/aadv4rk/" class="contact-btn" target="_blank">
+                    <i class="fa-brands fa-instagram"></i> Instagram
+                </a>
+                <a href="https://www.linkedin.com/in/fauzanihsputra/" class="contact-btn" target="_blank">
+                    <i class="fa-brands fa-linkedin"></i> LinkedIn
+                </a>
+                <a href="https://discord.gg/PkzVpPJkah" class="contact-btn" target="_blank">
+                    <i class="fa-brands fa-discord"></i> Discord
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        AOS.init();
+
+        const textArray = ["Hello World, This is Me!", "Welcome to My Portfolio!", "I'm Fauzan Ihsan Putra!"];
+        const typingSpeed = 100;
+        const erasingSpeed = 50;
+        const delayBetween = 1500;
+
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        const typingText = document.querySelector('.typing-text');
+
+        function typeLoop() {
+            const currentText = textArray[textIndex];
+
+            if (!isDeleting) {
+                typingText.textContent = currentText.substring(0, charIndex + 1);
+                charIndex++;
+                if (charIndex === currentText.length) {
+                    isDeleting = true;
+                    setTimeout(typeLoop, delayBetween);
+                } else {
+                    setTimeout(typeLoop, typingSpeed);
+                }
+            } else {
+                typingText.textContent = currentText.substring(0, charIndex - 1);
+                charIndex--;
+                if (charIndex === 0) {
+                    isDeleting = false;
+                    textIndex = (textIndex + 1) % textArray.length;
+                    setTimeout(typeLoop, typingSpeed);
+                } else {
+                    setTimeout(typeLoop, erasingSpeed);
+                }
+            }
+        }
+
+        window.onload = () => {
+            typeLoop();
+        };
+    </script>
+</body>
+
+</html>
